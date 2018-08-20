@@ -1,5 +1,4 @@
 import React, {Component, ComponentType} from 'react';
-import styled from "styled-components";
 import _ from "lodash";
 import NavigationSpy from "../NavigationContext/NavigationSpy";
 
