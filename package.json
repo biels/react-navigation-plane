@@ -21,10 +21,7 @@
   },
   "keywords": [
     "react",
-    "consumer",
-    "context",
-    "provider",
-    "all-of",
+    "navigation",
     "component"
   ],
   "author": "biels",
