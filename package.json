@@ -1,7 +1,7 @@
 {
-  "name": "react-all-of",
+  "name": "react-navigation-plane",
   "version": "1.0.3",
-  "description": "A react multi consumer component. Cut back on that nesting insanity!",
+  "description": "React navigation infrastructure. Multiple stacks and advanced features.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/biels/react-all-of.git"
+    "url": "git+https://github.com/biels/react-navigation-plane.git"
   },
   "keywords": [
     "react",
@@ -30,9 +30,9 @@
   "author": "biels",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/biels/react-all-of/issues"
+    "url": "https://github.com/biels/react-navigation-plane/issues"
   },
-  "homepage": "https://github.com/biels/react-all-of#readme",
+  "homepage": "https://github.com/biels/react-navigation-plane#readme",
   "devDependencies": {
     "@types/enzyme": "^3.1.13",
     "@types/enzyme-adapter-react-16": "^1.0.3",
@@ -55,7 +55,7 @@
   "dependencies": {
     "lodash": "^4.17.10",
     "react": "^16.4.2",
-    "react-all-of": "^1.0.2",
+    "react-navigation-plane": "^1.0.2",
     "react-dom": "^16.4.2",
     "react-stateful-switch": "^0.0.10",
     "styled-components": "^3.4.2"
