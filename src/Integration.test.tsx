@@ -10,7 +10,7 @@ import {PagesInfo} from "./types/PagesInfo";
 import PageContextSpy from "./PageContext/PageContextSpy";
 import {page} from "./PageContainer/page";
 
-describe('CompleteUseCase1', function () {
+describe('IntegrationTest', function () {
     it('should work with a single home page', function () {
         const pages: PagesInfo = {
             home: {

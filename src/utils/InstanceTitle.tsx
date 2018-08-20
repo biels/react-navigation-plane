@@ -1,7 +1,7 @@
 import React, {Component, ReactNode} from 'react';
 import _ from "lodash";
-import PageContextSpy from "./PageContext/PageContextSpy";
-import NavigationSpy from "./NavigationContext/NavigationSpy";
+import PageContextSpy from "../PageContext/PageContextSpy";
+import NavigationSpy from "../NavigationContext/NavigationSpy";
 
 
 export interface InstanceTitleProps {
