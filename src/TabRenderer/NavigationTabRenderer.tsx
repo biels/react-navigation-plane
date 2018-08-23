@@ -16,7 +16,7 @@ export interface NewTabProps {
     onClick: () => void
 }
 export interface NavigationTabRendererProps {
-    containerComponent: ComponentType,
+    containerComponent: ComponentType<{onWheel: Function}>, //Has to attach onWheel event
     tabComponent: ComponentType<TabComponentProps>
     newTabComponent: ComponentType<NewTabProps>
 }
@@ -27,12 +27,25 @@ class NavigationTabRenderer extends Component<NavigationTabRendererProps> {
     //     newTabComponent: NewTab,
     //     tabComponent: TabComponent
     // }
+    handleContainerWheel = ({stacks, selectedStackIndex, selectStack}) => (e: MouseWheelEvent) => {
+        // console.log(`Wheel ${e.deltaX} ${e.deltaY} ${e.deltaZ}, ${e.deltaMode}, ${e.wheelDeltaX} ${e.wheelDeltaY}`, e);
+        e.stopPropagation();
+        const transform = (delta) => {
+            if(delta == 0) return 0;
+            return delta > 0 ? 1 : -1
+        }
+        const newIndex = selectedStackIndex + transform(e.deltaY)
+        if(newIndex === selectedStackIndex) return;
+        let newStack = stacks[newIndex];
+        if(newStack == null) return;
+        selectStack(newStack.id)
+    }
     render() {
         const Container = this.props.containerComponent
         const NewTabComponent = this.props.newTabComponent
         const TabComponent = this.props.tabComponent
         return <NavigationSpy>
-            {({stacks, selectedStackId, navigate, selectStack, closeTab, titles}) => {
+            {({stacks, selectedStackId, selectedStackIndex, navigate, selectStack, closeTab, titles}) => {
                 const tabElements = stacks.map((stack, index) => {
                     const top = _.last(stack.frames)
 
@@ -46,7 +59,7 @@ class NavigationTabRenderer extends Component<NavigationTabRendererProps> {
                         onCloseClick={() => closeTab(stack.id)}
                     />
                 })
-                return <Container>
+                return <Container onWheel={this.handleContainerWheel({stacks, selectedStackIndex, selectStack})}>
                     {tabElements}
                     <NewTabComponent key={-1} onClick={() => navigate({to: 'home', inNewTab: true, focusNewTab: true})}/>
                 </Container>
