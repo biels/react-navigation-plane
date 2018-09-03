@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "lib",
-    "module": "es6",
+    "module": "commonjs",
     "target": "es6",
     "lib": [
       "es6",
