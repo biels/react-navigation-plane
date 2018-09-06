@@ -63,7 +63,7 @@
     "lodash": "^4.17.10",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-entity-plane": "^0.0.1",
+    "react-entity-plane": "^0.2.2",
     "styled-components": "^3.4.2"
   },
   "jest": {
