@@ -67,7 +67,9 @@ export interface ProvidedNavigationContext {
 
 const {Provider: RawProvider, Consumer: NavigationConsumer} = React.createContext<ProvidedNavigationContext>(null as any);
 
-
+/**
+ * Holds the navigation state
+ */
 class NavigationContext extends Component<NavigationProps, NavigationState> {
     state: NavigationState = {
         stacks: [

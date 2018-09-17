@@ -7,6 +7,9 @@ export interface PageContextSpyProps {
     children: (context: ProvidedPageContext) => any
 }
 
+/**
+ * Accesses the PageContext. Can be used outside a provider, to allow for out of page buttons such as in a Sidebar.
+ */
 class PageContextSpy extends Component<PageContextSpyProps> {
     render() {
         return <PageContextConsumer>

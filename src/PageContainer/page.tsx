@@ -14,6 +14,7 @@ export const page = (component) => class extends React.Component<{location: Stac
         // console.log(`Page ${component.displayName} unmounted`);
     }
     shouldComponentUpdate(nextProps, nextState){
+        //FIXME Possibly reverse check. Not that page args change frequently though.
         if(_.isEqual(this.props.args, nextProps.args)) return true
         return false
     }

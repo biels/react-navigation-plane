@@ -21,6 +21,9 @@ export interface NavigationTabRendererProps {
     newTabComponent: ComponentType<NewTabProps>
 }
 
+/**
+ * Renders tabs that control the current NavigationContext. Fully customizable.
+ */
 class NavigationTabRenderer extends Component<NavigationTabRendererProps> {
     // static defaultProps: Partial<NavigationTabRendererProps> = {
     //     containerComponent: DefaultContainer,

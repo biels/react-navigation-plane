@@ -8,6 +8,9 @@ export interface NavigationPageRendererProps {
 
 }
 
+/**
+ * Renders the
+ */
 class NavigationPageRenderer extends Component<NavigationPageRendererProps> {
     render() {
         return <NavigationSpy>

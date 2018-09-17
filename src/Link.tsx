@@ -12,6 +12,9 @@ export interface LinkProps {
     replace?: boolean
 }
 
+/**
+ * Link component to use within the navigation plane
+ */
 class Link extends Component<LinkProps> {
     render() {
         return <NavigationSpy>

@@ -12,6 +12,10 @@ let options: MutationObserverInit = {
     characterData: true,
     subtree: true
 };
+
+/**
+ * Component used to extract the rendered text for the page title
+ */
 class InstanceTitle extends Component<InstanceTitleProps> {
     divRef: React.RefObject<HTMLDivElement> = React.createRef();
     setPageTitle = null

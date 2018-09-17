@@ -9,8 +9,11 @@ export interface NavigationSpyProps {
     children: (context: ProvidedNavigationContext) => ReactNode
 }
 
-// Can be used inside and outside a page
-// Attaches source page when possible
+
+/**
+ * Reads the NavigationContext. Can be used inside and outside a page.
+ * Attaches source page to navigate action when possible.
+ */
 class NavigationSpy extends Component<NavigationSpyProps> {
     render() {
         return <PageContextSpy>

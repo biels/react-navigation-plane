@@ -24,6 +24,10 @@ export interface ProvidedPageContext {
     frame: StackFrame
 }
 const {Provider: RawProvider, Consumer: PageContextConsumer} = React.createContext<ProvidedPageContext>(null as any);
+
+/**
+ * Provides args, location, navigate with source and processed navigation information to the page.
+ */
 class PageContext extends Component<PageContextProps, PageContextState> {
     render() {
         return <NavigationSpy>

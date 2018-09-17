@@ -11,6 +11,9 @@ export interface PageContainerProps {
     location: StackFrameLocation
 }
 
+/**
+ * Wrapper that is applied when using the page(Page) helper function
+ */
 class PageContainer extends Component<PageContainerProps> {
     handleSubmit = () => {
 
