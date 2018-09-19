@@ -5,6 +5,7 @@ import {PageArgs} from "../types/PageArgs";
 
 interface RegisteredPages {
     home: ComponentType
+
     [pageName: string]: ComponentType
 }
 
@@ -24,11 +25,13 @@ export interface StackFrameLocation {
     stackId: number
     frameIndex: number
 }
-export interface NavigationStack{
+
+export interface NavigationStack {
     id: number
     openerLocation: StackFrameLocation | null
     frames: StackFrame[]
 }
+
 interface NavigationState {
     stacks: NavigationStack[],
     selectedStackId: number,
@@ -43,6 +46,7 @@ export interface NavigateParams {
     replace?: boolean
 
 }
+
 export interface NavigatePageContextParams {
     from: StackFrameLocation | null
 }
@@ -67,13 +71,15 @@ export interface ProvidedNavigationContext {
 
 const {Provider: RawProvider, Consumer: NavigationConsumer} = React.createContext<ProvidedNavigationContext>(null as any);
 
+let homeFrame = {pageName: 'home', title: 'Inicio', args: {}};
+
 /**
  * Holds the navigation state
  */
 class NavigationContext extends Component<NavigationProps, NavigationState> {
     state: NavigationState = {
         stacks: [
-            {id: 0, openerLocation: null, frames: [{pageName: 'home', title: 'Inicio', args: {}}]}
+            {id: 0, openerLocation: null, frames: [homeFrame]}
         ],
         selectedStackId: 0,
         nextStackId: 1,
@@ -129,7 +135,11 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
         })
     }
     closeTab = (id: number) => {
-        if(this.state.stacks.length <= 1) return;
+        if (this.state.stacks.length <= 1) {
+            // Only one stack left
+            this.setStackFrames(id, [homeFrame])
+            return;
+        }
         let stackIndex = this.getStackIndex(id);
         let newStacks = this.state.stacks
         newStacks.splice(stackIndex, 1)
@@ -145,10 +155,10 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
     }
     setPageTitle = ({stackId, frameIndex}: StackFrameLocation, title: string) => {
         let stack = this.getStack(stackId);
-        if(stack == null) return;
+        if (stack == null) return;
         let newStackFrames = stack.frames;
         let frame = newStackFrames[frameIndex];
-        if(frame == null) return;
+        if (frame == null) return;
         const oldTitle = frame.title;
         if (oldTitle === title) return;
         newStackFrames[frameIndex].title = title;
@@ -160,7 +170,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
         this.pop(this.state.selectedStackId, number)
     }
     handleNavigate = ({from}: NavigatePageContextParams) => ({to, args, inNewTab, focusNewTab, replace}: NavigateParams) => {
-        if(this.props.pages[to] == null) return;
+        if (this.props.pages[to] == null) return;
         let frame: StackFrame = {pageName: to, args: args, title: ''};
         if (replace) {
             if (this.getStack().frames.length <= 1) return;
@@ -185,6 +195,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
     getTitles = () => {
         return this.state.stacks.map(s => _.last(s.frames)).map(f => f.title)
     }
+
     render() {
         return <RawProvider value={{
             titles: this.getTitles(),
