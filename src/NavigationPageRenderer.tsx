@@ -5,7 +5,8 @@ import {StackFrameLocation} from "./NavigationContext/NavigationContext";
 import {Switch} from 'react-stateful-switch';
 
 export interface NavigationPageRendererProps {
-
+    maxHiddenFrames?: number
+    maxHiddenStacks?: number
 }
 
 /**
@@ -27,10 +28,10 @@ class NavigationPageRenderer extends Component<NavigationPageRendererProps> {
                         return <DisplayPageComponent args={frame.args} location={location}/>
                     })
 
-                    return <Switch key={stack.id} views={renderedFrames} selected={stack.frames.length - 1}/>
+                    console.log(`Frames for ${stack.id}`, stack.frames, 'Selected: ' + (stack.frames.length - 1));
+                    return <Switch key={stack.id} views={renderedFrames} selected={stack.frames.length - 1} maxHidden={this.props.maxHiddenFrames}/>
                 })
-
-                return <Switch views={renderedStacks} selected={selectedStackIndex}/>
+                return <Switch views={renderedStacks} selected={selectedStackIndex || 0} maxHidden={this.props.maxHiddenStacks}/>
             }}
         </NavigationSpy>
     }
