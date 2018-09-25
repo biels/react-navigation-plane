@@ -19,7 +19,7 @@ describe('IntegrationTest', function () {
                     <PageContextSpy>
                         {(pageContext) => {
                             expect(pageContext).not.toBeNull()
-                            console.log('pageContext', pageContext);
+                            // console.log('pageContext', pageContext);
                             return null
                         }}
                     </PageContextSpy>

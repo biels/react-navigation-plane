@@ -163,7 +163,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
         if (oldTitle === title) return;
         newStackFrames[frameIndex].title = title;
         this.setStackFrames(stackId, newStackFrames)
-        console.log(`Set page title of stack ${stackId} to ${title}`);
+        // console.log(`Set page title of stack ${stackId} to ${title}`);
     }
     handleBack = (number = 1) => {
         if (this.getStack().frames.length <= 1) return;
