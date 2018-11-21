@@ -13,7 +13,7 @@ export type PageName = keyof RegisteredPages
 
 interface NavigationProps {
     pages: PagesInfo
-    homeFrame: StackFrame
+    homeFrame?: StackFrame
 }
 
 export interface StackFrame {
