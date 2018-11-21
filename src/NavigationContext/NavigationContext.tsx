@@ -13,6 +13,7 @@ export type PageName = keyof RegisteredPages
 
 interface NavigationProps {
     pages: PagesInfo
+    homeFrame: StackFrame
 }
 
 export interface StackFrame {
@@ -77,9 +78,10 @@ let homeFrame = {pageName: 'home', title: 'Inicio', args: {}};
  * Holds the navigation state
  */
 class NavigationContext extends Component<NavigationProps, NavigationState> {
+    homeFrame = this.props.homeFrame || homeFrame
     state: NavigationState = {
         stacks: [
-            {id: 0, openerLocation: null, frames: [homeFrame]}
+            {id: 0, openerLocation: null, frames: [this.homeFrame]}
         ],
         selectedStackId: 0,
         nextStackId: 1,
@@ -137,7 +139,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
     closeTab = (id: number) => {
         if (this.state.stacks.length <= 1) {
             // Only one stack left
-            this.setStackFrames(id, [homeFrame])
+            this.setStackFrames(id, [this.homeFrame])
             return;
         }
         let stackIndex = this.getStackIndex(id);

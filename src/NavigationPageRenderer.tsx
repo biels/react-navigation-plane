@@ -1,5 +1,4 @@
 import React, {Component, ComponentType} from 'react';
-import styled from "styled-components";
 import NavigationSpy from "./NavigationContext/NavigationSpy";
 import {StackFrameLocation} from "./NavigationContext/NavigationContext";
 import {Switch} from 'react-stateful-switch';
