@@ -72,7 +72,7 @@ export interface ProvidedNavigationContext {
 
 const {Provider: RawProvider, Consumer: NavigationConsumer} = React.createContext<ProvidedNavigationContext>(null as any);
 
-let homeFrame = {pageName: 'home', title: 'Inicio', args: {}};
+let homeFrame = {pageName: 'home', title: 'Inici', args: {}};
 
 /**
  * Holds the navigation state

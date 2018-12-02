@@ -16,7 +16,7 @@ export interface PageContextProps {
 export interface PageContextState {
     route: string[]
 }
-export interface ProvidedPageContext {
+export interface ProvidedPageContext extends ProvidedNavigationContext{
     state: PageContextState
     args: PageArgs
     location: StackFrameLocation
@@ -44,6 +44,7 @@ class PageContext extends Component<PageContextProps, PageContextState> {
             {(navigation: ProvidedNavigationContext) => {
                 const navigate = () => navigation.navigateFromPage({from: this.props.location})
                 return <RawProvider value={{
+                    ...navigation,
                     state: this.state,
                     args: this.props.args || {},
                     location: this.props.location,
