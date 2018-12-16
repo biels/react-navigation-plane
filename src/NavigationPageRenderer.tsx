@@ -26,7 +26,6 @@ class NavigationPageRenderer extends Component<NavigationPageRendererProps> {
                         }
                         return <DisplayPageComponent args={frame.args} location={location}/>
                     })
-
                     // console.log(`Frames for ${stack.id}`, stack.frames, 'Selected: ' + (stack.frames.length - 1));
                     return <Switch key={stack.id} views={renderedFrames} selected={stack.frames.length - 1} maxHidden={this.props.maxHiddenFrames}/>
                 })
