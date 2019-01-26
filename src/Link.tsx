@@ -19,7 +19,9 @@ class Link extends Component<LinkProps> {
     render() {
         return <NavigationSpy>
             {({navigate}) => {
-                return <div onClick={() => navigate(this.props)}>
+                return <div onClick={(e) => {
+                    navigate({inNewTab: e.ctrlKey, focusNewTab: e.ctrlKey, ...this.props});
+                }}>
                     {this.props.children}
                 </div>
             }}

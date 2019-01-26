@@ -67,6 +67,7 @@ export interface ProvidedNavigationContext {
     getFrame: (location: StackFrameLocation) => StackFrame
     closeTab: (index: number) => void
     pages: PagesInfo
+    duplicateStack: (stackId: number, openerLocation?: StackFrameLocation | null, focus?: boolean) => void
     titles: string[]
 }
 
@@ -198,6 +199,20 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
         return this.state.stacks.map(s => _.last(s.frames)).map(f => f.title)
     }
 
+    // Advanced functionalities
+    duplicateStack = (stackId, openerLocation: StackFrameLocation | null = null, focus = true) => {
+        let originStack = this.getStack(stackId);
+        let newId = this.state.nextStackId;
+        let clonedStack: NavigationStack = {frames: _.cloneDeep(originStack.frames), id: newId, openerLocation: originStack.openerLocation || openerLocation}
+        let newStacks = [...this.state.stacks]
+        newStacks.splice(this.getStackIndex(stackId) + 1, 0, clonedStack);
+        this.setState({
+            stacks: newStacks,
+            selectedStackId: focus ? newId : this.state.selectedStackId,
+            nextStackId: newId + 1
+        })
+    }
+
     render() {
         return <RawProvider value={{
             titles: this.getTitles(),
@@ -214,7 +229,8 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
             closeTab: this.closeTab,
             setPageTitle: this.setPageTitle,
             getStack: this.getStack,
-            getFrame: this.getFrame
+            getFrame: this.getFrame,
+            duplicateStack: this.duplicateStack
         }}>
             {this.props.children}
         </RawProvider>

@@ -11,6 +11,8 @@ export interface TabComponentProps {
     onClose?: () => void
     onCloseClick?: () => void
     onClick: () => void
+    onNewTabClick: () => void
+    onDuplicateTabClick: () => void
 }
 export interface NewTabProps {
     onClick: () => void
@@ -48,7 +50,8 @@ class NavigationTabRenderer extends Component<NavigationTabRendererProps> {
         const NewTabComponent = this.props.newTabComponent
         const TabComponent = this.props.tabComponent
         return <NavigationSpy>
-            {({stacks, selectedStackId, selectedStackIndex, navigate, selectStack, closeTab, titles}) => {
+            {({stacks, selectedStackId, selectedStackIndex, navigate, selectStack, closeTab, titles, duplicateStack}) => {
+                let navigateToNewTab = () => navigate({to: 'home', inNewTab: true, focusNewTab: true});
                 const tabElements = stacks.map((stack, index) => {
                     const top = _.last(stack.frames)
 
@@ -60,11 +63,13 @@ class NavigationTabRenderer extends Component<NavigationTabRendererProps> {
                         size={stack.frames.length}
                         onClick={() => selectStack(stack.id)}
                         onCloseClick={() => closeTab(stack.id)}
+                        onNewTabClick={navigateToNewTab}
+                        onDuplicateTabClick={() => duplicateStack(stack.id)}
                     />
                 })
                 return <Container onWheel={this.handleContainerWheel({stacks, selectedStackIndex, selectStack})}>
                     {tabElements}
-                    <NewTabComponent key={-1} onClick={() => navigate({to: 'home', inNewTab: true, focusNewTab: true})}/>
+                    <NewTabComponent key={-1} onClick={navigateToNewTab}/>
                 </Container>
             }}
         </NavigationSpy>
