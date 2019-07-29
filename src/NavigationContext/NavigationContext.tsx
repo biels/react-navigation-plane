@@ -109,23 +109,28 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
         this.setState({
             stacks: newStacks
         })
+        this.persistState()
     }
     selectStack = (id) => {
         this.setState({selectedStackId: id})
+        this.persistState()
     }
     push = (stackId, frame: StackFrame) => {
         let stack = this.getStack(stackId);
         const newStackFrames = _.concat(stack.frames, frame)
         this.setStackFrames(stackId, newStackFrames)
+        this.persistState()
     }
     pop = (stackId: number, n: number) => {
         let stack = this.getStack(stackId);
         const newStackFrames = _.dropRight(stack.frames, Math.min(n, stack.frames.length - 1))
         this.setStackFrames(stackId, newStackFrames)
+        this.persistState()
     }
     replace = (stackId, frame: StackFrame) => {
         this.pop(stackId, 1);
         this.push(stackId, frame);
+        this.persistState()
     }
     newTab = (initialFrame: StackFrame, openerLocation: StackFrameLocation | null, focus = false) => {
         let newId = this.state.nextStackId;
@@ -136,6 +141,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
             selectedStackId: focus ? newId : this.state.selectedStackId,
             nextStackId: newId + 1
         })
+        this.persistState()
     }
     closeTab = (id: number) => {
         if (this.state.stacks.length <= 1) {
@@ -155,6 +161,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
             stacks: newStacks,
             selectedStackId: newSelectedStackId
         })
+        this.persistState()
     }
     setPageTitle = ({stackId, frameIndex}: StackFrameLocation, title: string) => {
         let stack = this.getStack(stackId);
@@ -185,6 +192,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
             return
         }
         this.push(this.state.selectedStackId, frame)
+
     }
     // filterFrame = (frame: StackFrame) => {
     //     return _.omit(frame, ['title'])
@@ -211,6 +219,9 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
             selectedStackId: focus ? newId : this.state.selectedStackId,
             nextStackId: newId + 1
         })
+    }
+    persistState(){
+        localStorage.setItem('navState', JSON.stringify(this.state))
     }
 
     render() {
