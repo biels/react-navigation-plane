@@ -20,7 +20,8 @@ class Link extends Component<LinkProps> {
         return <NavigationSpy>
             {({navigate}) => {
                 return <div onClick={(e) => {
-                    navigate({inNewTab: e.ctrlKey, focusNewTab: e.ctrlKey, ...this.props});
+                    let {children, ...props} = this.props;
+                    navigate({inNewTab: e.ctrlKey, focusNewTab: e.ctrlKey, ...props});
                 }}>
                     {this.props.children}
                 </div>
