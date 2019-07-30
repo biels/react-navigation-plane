@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-plane",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "React navigation infrastructure. Multiple stacks and advanced features.",
   "main": "src/index.ts",
   "scripts": {
