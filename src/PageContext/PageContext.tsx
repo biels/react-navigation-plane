@@ -42,7 +42,7 @@ class PageContext extends Component<PageContextProps, PageContextState> {
     render() {
         return <NavigationSpy>
             {(navigation: ProvidedNavigationContext) => {
-                const navigate = () => navigation.navigateFromPage({from: this.props.location})
+                const navigate = navigation.navigateFromPage({from: this.props.location})
                 return <RawProvider value={{
                     ...navigation,
                     state: this.state,

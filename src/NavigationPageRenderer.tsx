@@ -18,7 +18,7 @@ class NavigationPageRenderer extends Component<NavigationPageRendererProps> {
                 if (pages == null) return null;
                 const renderedStacks = stacks.map((stack, stackIndex) => {
                     const renderedFrames = stack.frames.map((frame, frameIndex) => {
-                        const DisplayPageComponent: ComponentType<any> = pages[frame.pageName].component;
+                        const DisplayPageComponent: ComponentType<any> = pages[frame.pageName]?.component;
                         if (DisplayPageComponent == null) return null;
                         const location: StackFrameLocation = { // Get specific one when rendering all the tabs at the same time
                             stackId: stack.id,
