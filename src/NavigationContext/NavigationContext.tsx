@@ -174,7 +174,7 @@ class NavigationContext extends Component<NavigationProps, NavigationState> {
     }
     handleNavigate = ({from}: NavigatePageContextParams) => ({to, args, inNewTab, focusNewTab, replace}: NavigateParams) => {
         if (this.props.pages[to] == null) return;
-        let frame: StackFrame = {pageName: to, args: args, title: ''};
+        let frame: StackFrame = {pageName: to, args: args || {}, title: ''};
         if (replace) {
             if (this.getStack().frames.length <= 1) return;
             this.replace(this.state.selectedStackId, frame)
